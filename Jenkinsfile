@@ -51,14 +51,15 @@ pipeline {
               reuseNode true
             }
           }
-          steps {
-            sh '''
-              echo "E2E Stage"
-              npm install serve
-              node_modules/.bin/serve -s build
-              npx playright test
-            '''
-          }
+        steps {
+          sh '''
+            echo "E2E Stage"
+            npm install serve
+            node_modules/.bin/serve -s build &
+            sleep 10
+            npx playright test
+          '''
+        }
         }
     }
 
